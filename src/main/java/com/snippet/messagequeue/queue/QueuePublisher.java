@@ -1,5 +1,6 @@
-package com.snippet.messagequeue;
+package com.snippet.messagequeue.queue;
 
+import com.snippet.messagequeue.MQTypeEnum;
 import java.util.Date;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -16,7 +17,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
  *
  * @author leixu2
  */
-public class Publisher {
+public class QueuePublisher {
 
     private static final String BROKER_URL = "tcp://localhost:61616";
     private static final String QUEUE_NAME = "p2pqueue";
@@ -27,7 +28,7 @@ public class Publisher {
     private Destination destination;
     private MessageProducer producer;
 
-    public Publisher(MQTypeEnum mqType) {
+    public QueuePublisher(MQTypeEnum mqType) {
         switch (mqType) {
             case ACTIVEMQ:
                 connectionFactory = new ActiveMQConnectionFactory(ActiveMQConnection.DEFAULT_USER,
@@ -70,7 +71,7 @@ public class Publisher {
     }
     
     public static void main(String[] args) {
-        Publisher activeMQPublisher = new Publisher(MQTypeEnum.ACTIVEMQ);
+        QueuePublisher activeMQPublisher = new QueuePublisher(MQTypeEnum.ACTIVEMQ);
         activeMQPublisher.sendMessage("XL Producer MSG");
         System.out.println("Message sent at " + new Date());
     }
