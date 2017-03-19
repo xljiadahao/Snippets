@@ -9,6 +9,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <net.sf.dozer>5.0</net.sf.dozer>
+        <org.springframework.version>4.2.6.RELEASE</org.springframework.version>
     </properties>
     <dependencies>
         <dependency>
@@ -21,6 +23,21 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-core</artifactId>
             <version>5.7.0</version>
+        </dependency>
+        <dependency>  
+            <groupId>net.sf.dozer</groupId>  
+            <artifactId>dozer</artifactId>  
+            <version>${net.sf.dozer}</version>  
+        </dependency>
+        <dependency>  
+            <groupId>org.slf4j</groupId>  
+            <artifactId>slf4j-log4j12</artifactId>  
+            <version>1.7.2</version>  
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${org.springframework.version}</version>
         </dependency>
     </dependencies>
 </project>
