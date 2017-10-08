@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+          xsi:schemaLocation="http://dozer.sourceforge.net  
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">  
+
+    <mapping>
+        <class-a>com.snippet.dozer.businessobject.rest.BirthDetailRest</class-a>
+        <class-b>com.snippet.dozer.businessobject.BirthDetailBO</class-b>
+        <field>
+            <a>dateReq</a>
+            <b>date</b>
+        </field>
+        <field>
+            <a>descrpReq</a>
+            <b>descrp</b>
+        </field>
+        <field>
+            <a>placeReq</a>
+            <b>place</b>
+        </field>
+    </mapping>
+    
+    <mapping>
+        <class-a>com.snippet.dozer.businessobject.rest.PlaceRest</class-a>
+        <class-b>com.snippet.dozer.businessobject.PlaceBO</class-b>
+        <field>
+            <a>cityReq</a>
+            <b>city</b>
+        </field>
+        <field>
+            <a>stateReq</a>
+            <b>state</b>
+        </field>
+        <field>
+            <a>countryReq</a>
+            <b>country</b>
+        </field>
+        <!-- as decription name is the same for both of PlaceRest and PlaceBO, so indicating description is not required -->
+    </mapping>
+    
+</mappings>  

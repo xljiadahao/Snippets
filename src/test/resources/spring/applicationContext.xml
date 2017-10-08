@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+        <context:annotation-config />
+
+        <!-- package scan -->
+        <context:component-scan base-package="com.snippet.java8.feature.functionalinterface.lambda.streamapi" />
+        
+        <bean id="onlinePayment" class="com.snippet.java8.feature.functionalinterface.lambda.streamapi.OnlinePayment">
+            <!-- inject enum method 1 -->
+            <constructor-arg index="0"> <!-- value="PAYPAL" -->
+                <!-- inject enum method 2 -->
+                <value type="com.snippet.java8.feature.OnlinePaymentMethod">PAYPAL</value>
+            </constructor-arg>
+        </bean>
+        <bean id="shoppingCart" class="com.snippet.java8.feature.ShoppingCart" />
+        
+        <!-- inject enum method 3 -->
+        <!-- <bean id="paypal" class="com.snippet.java8.feature.OnlinePaymentMethod" 
+              factory-method="valueOf" lazy-init="false">
+            <constructor-arg value="PAYPAL" />
+        </bean> -->
+        
+</beans>
