@@ -3,11 +3,16 @@ package com.snippet.test.rxjava;
 import com.snippet.rxjava.RXWordAccumulator;
 import com.snippet.rxjava.RXWordCounterCollectAlgorithm;
 import com.snippet.rxjava.RXWordCounterZipAlgorithm;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+import rx.Observable;
+import rx.Observer;
 import rx.observers.TestSubscriber;
 
 /**
@@ -72,4 +77,49 @@ public class RXWordAccumulatorTest {
         assertTrue("word Payment count mismatch", counters.get("Payment") == 9);
     }
 
+    @Test
+    public void testObservableFrom() {
+        String someStrings[] = {"Hello", " ", "World","!"};
+        StringBuilder concatString = new StringBuilder();
+        // from: stream as multiple elements
+        Observable.from(someStrings).subscribe(new Observer<String>() {
+            @Override
+            public void onNext(String i) {
+                System.out.println("Observable from onNext");
+                concatString.append(i);
+            }
+            @Override
+            public void onCompleted() {
+                System.out.println("Observable from onCompleted");
+            }
+            @Override
+            public void onError(Throwable arg0) {
+                System.out.println("Observable from onError");
+            }
+        });
+        assertTrue("word mismatch", "Hello World!".equalsIgnoreCase(concatString.toString()));
+    }
+    
+    @Test
+    public void testObservableJust() {
+        List<String> list = new ArrayList<>();
+        // just: stream as single element
+        Observable.just(Arrays.asList("Hello", "World")).subscribe(new Observer<List<String>>() {
+            @Override
+            public void onNext(List<String> t) {
+                System.out.println("Observable just onNext");
+                list.addAll(t);
+            }
+            @Override
+            public void onCompleted() {
+                System.out.println("Observable just onCompleted");
+            }
+            @Override
+            public void onError(Throwable arg0) {
+                System.out.println("Observable just onError");
+            }
+        });
+        assertTrue("word size mismatch", list.size() == 2);
+    }
+    
 }
