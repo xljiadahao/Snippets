@@ -26,9 +26,15 @@ public class Player extends Thread {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
+        Poker.card1.set(r.nextInt(10));
+        Poker.card2.set(r.nextInt(10));
         System.out.println("Player [" + id + "," + name + "] get into the game room. "
-                + "Delay " + delay + " seconds...");
+                + "Delay " + delay + " seconds... "
+                + "Poker: " + Poker.card1.get() + " and " + Poker.card2.get());
+        Poker.sharedResult.put(name, Poker.card1.get()*Poker.card2.get());
         latch.countDown();
+        Poker.card1.remove();
+        Poker.card2.remove();
     } 
     
 }
