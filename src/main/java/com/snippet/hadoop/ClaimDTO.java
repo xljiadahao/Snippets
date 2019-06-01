@@ -6,12 +6,13 @@ import java.io.IOException;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
 /**
  *
  * @author xulei
  */
-public class ClaimDTO implements Writable {
+public class ClaimDTO implements Writable, WritableComparable<ClaimDTO> {
     
     private Text companyName;
     private Text location;
@@ -86,6 +87,11 @@ public class ClaimDTO implements Writable {
                 + ", location=" + location.toString() 
                 + ", method=" + method.toString() 
                 + ", amount=" + amount.get() + '}';
+    }
+
+    @Override
+    public int compareTo(ClaimDTO o) {
+        return o.getAmount().get() - this.getAmount().get();
     }
     
 }

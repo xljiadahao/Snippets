@@ -48,6 +48,9 @@ public class ClaimAccumulator {
         job.setPartitionerClass(ClaimLocationPartitioner.class);
         job.setNumReduceTasks(3);
         
+        // define combiner, reducing in mapper task phase
+        // job.setCombinerClass(SortCombiner.class);
+        
         job.setMapperClass(ClaimCountMapper.class);
         job.setReducerClass(ClaimLocationReducer.class);
         job.setMapOutputKeyClass(Text.class);
