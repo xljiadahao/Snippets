@@ -13,7 +13,17 @@ import org.apache.hadoop.util.GenericOptionsParser;
  * hadoop jar ~/Desktop/hadoop101.jar com.snippet.hadoop.ClaimAccumulator 
  * -Dhdfs.file.input=/claimaccumulator/input -Dhdfs.file.output=/claimaccumulator/output
  * 
- * Result: hdfs dfs -cat /claimaccumulator/output/part-r-00000
+ * Result with Partition: 
+ * hdfs dfs -cat /claimaccumulator/output5/part-r-00000
+ * Singapore-PayPal	ClaimDTO{companyName=PayPal, location=Singapore, method=Grab, amount=270}
+ * Singapore-V-Key	ClaimDTO{companyName=V-Key, location=Singapore, method=Taxi,Grab,Uber, amount=310}
+ * hdfs dfs -cat /claimaccumulator/output5/part-r-00001
+ * Hangzhou-V-Key	ClaimDTO{companyName=V-Key, location=Hangzhou, method=Hotel, amount=2400}
+ * hdfs dfs -cat /claimaccumulator/output5/part-r-00002
+ * Shanghai-PayPal	ClaimDTO{companyName=PayPal, location=Shanghai, method=Didi, amount=50}
+ * 
+ * Result without Partition: 
+ * hdfs dfs -cat /claimaccumulator/output/part-r-00000
  * Hangzhou-V-Key	ClaimDTO{companyName=V-Key, location=Hangzhou, method=Hotel, amount=2400}
  * Shanghai-PayPal	ClaimDTO{companyName=PayPal, location=Shanghai, method=Didi, amount=50}
  * Singapore-PayPal	ClaimDTO{companyName=PayPal, location=Singapore, method=Grab, amount=270}
@@ -33,6 +43,11 @@ public class ClaimAccumulator {
         new GenericOptionsParser(configuration, args);
         Job job = Job.getInstance(configuration);
         job.setJarByClass(ClaimAccumulator.class);
+        
+        // difine partition rule
+        job.setPartitionerClass(ClaimLocationPartitioner.class);
+        job.setNumReduceTasks(3);
+        
         job.setMapperClass(ClaimCountMapper.class);
         job.setReducerClass(ClaimLocationReducer.class);
         job.setMapOutputKeyClass(Text.class);
