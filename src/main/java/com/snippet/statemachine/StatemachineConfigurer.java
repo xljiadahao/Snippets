@@ -4,7 +4,7 @@ import java.util.EnumSet;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.action.Action;
-import org.springframework.statemachine.config.EnableStateMachine;
+import org.springframework.statemachine.config.EnableStateMachineFactory;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.StateMachineBuilder;
 import org.springframework.statemachine.config.StateMachineBuilder.Builder;
@@ -17,7 +17,7 @@ import org.springframework.statemachine.config.builders.StateMachineTransitionCo
  * @author xulei
  */
 @Configuration
-@EnableStateMachine
+@EnableStateMachineFactory
 public class StatemachineConfigurer extends 
         EnumStateMachineConfigurerAdapter<TurnstileStates, TurnstileEvents> {
 
@@ -80,6 +80,11 @@ public class StatemachineConfigurer extends
                 .event(TurnstileEvents.PUSH)
                 .target(TurnstileStates.LOCKED)
                 .action(customerPassAndLock());
+        
+        builder.configureConfiguration()
+                .withConfiguration()
+                .machineId("Turnstile Statemachine");
+        
         return builder.build();        
     }
     
