@@ -11,7 +11,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <net.sf.dozer>5.0</net.sf.dozer>
-        <org.springframework.version>4.3.23.RELEASE</org.springframework.version>
+        <org.springframework.version>5.3.19</org.springframework.version>
     </properties>
     <dependencies>
         <dependency>
